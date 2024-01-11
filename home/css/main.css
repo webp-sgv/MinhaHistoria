@@ -3,20 +3,18 @@
     padding: 0;
 }
 
-input:focus {
-    outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #fc706f;
-}
-textarea:focus {
-    outline: none !important;
-    border-color: #719ECE;
-    box-shadow: 0 0 10px #fc706f;
-}
 body {
     background-color: rgb(230 230 230);
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+.boxLinkHeader {
+    display: flex;
+    justify-content: flex-end;
+}
 .logo {
     width: 100px;
 }
