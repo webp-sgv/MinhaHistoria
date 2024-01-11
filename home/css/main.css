@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input:focus {
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #fc706f;
+}
+textarea:focus {
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #fc706f;
+}
+body {
+    background-color: rgb(230 230 230);
+}
+
+.logo {
+    width: 100px;
+}
+.rowAdjust {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.hello {
+    margin: 10% 0 10% 0;
+}
+#aboutpart {
+    background: linear-gradient(-90deg, #f42a80, #fc706f);
+    margin: 0;
+    padding: 100px 0 100px 0;
+    color: white;
+}
+.boxFlipCard {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.socialmedia {
+    color: white;
+    font-size: 30px;
+    margin: 0px 5px;
+}
+.socialmedia2 {
+    color: white;
+    font-size: 40px;
+    margin: 0px 5px;
+}
+.socialmedia:hover {
+    color: darkgray;
+}
+.socialmedia2:hover {
+    color: darkgray;
+}
+.portfolio {
+    margin-top: 100px;
+}
+.caixadefora {
+    background-color: white;
+    box-shadow: 0px 2px 50px rgba(0, 0, 0, .15);
+}
+.trabalhos {
+    width: 50px;
+    height: 100%;
+    min-width: 50px;
+    padding: 10px !important;
+}
+.navigation {
+    background-color: transparent;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: darkgray;
+    padding: 5px 5px;
+}
+.navigation:hover {
+    color: #f42a80;
+}
+.formulario {
+    margin: 20px;
+    padding: 20px 70px;
+    border-radius: 10pt;
+    border: transparent;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, .15);
+    background-color: whitesmoke;
+    color: lightgrey;
+}
+.formulariomensagem {
+    margin: 20px;
+    padding: 20px 70px 150px 70px;
+    border-radius: 10pt;
+    border: transparent;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, .15);
+    background-color: whitesmoke;
+    color: lightgrey;
+}
+.contactos {
+    margin: 100px 0 100px 0;
+    padding: 0px !important;
+}
+#titulo1 {
+    font-family: 'Open Sans', sans-serif;
+}
+#titulo2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+.butao {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+}
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.textoabout {
+    max-width: 600px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.colcolunacurriculo {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.butaofinal {
+    color: white;
+    margin: 10px;
+    background-color: transparent;
+}
+.rectangle {
+    height: 5px;
+    width: 75px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.rectangle2 {
+    height: 5px;
+    width: 75px;
+    background-color: grey;
+    margin-bottom: 20px;
+}
+.copyrighttext {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px 0px;
+}
+
+footer {
+    background-color: grey;
+    margin: 0;
+    padding: 50px 100px;
+}
+.footerMargin {
+    margin: 0px !important;
+}
