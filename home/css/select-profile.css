@@ -1,0 +1,106 @@
+/* [START] GROUP SELECT PROFILE */
+.selectProfileGroup {
+    position: relative;
+    width: 100%;
+    cursor: default;
+    background: #fefefe;
+    transition: box-shadow 0.1s ease-in;
+}
+.selectProfileGroup.actived {
+    -webkit-box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+}
+.selectProfileGroup.actived>.selectProfilePreview>i {
+    transform: rotate(180deg);
+}
+/* [END] GROUP SELECT PROFILE */
+
+/* [START] HEADER SELECT PROFILE */
+.selectProfilePreview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+    padding: 5px 10px 5px 5px;
+}
+.selectProfilePreview>img {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px 0 0;
+}
+.selectProfilePreview>i {
+    transition: transform .1s ease-in;
+    margin: 0 0 0 10px;
+}
+/* [END] HEADER SELECT PROFILE */
+
+/* [START] INPUT FIND PROFILE */
+.selectProfileFilter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 10px 0;
+    padding: 10px 10px 10px 10px;
+    border-bottom: 1px solid #cacaca40;
+    border-top: 1px solid #cacaca40;
+    background: #fff;
+}
+.selectProfileFilter>i {
+    margin: 0 0 0 10px;
+}
+.selectProfileFilter>input {
+    cursor: default;
+}
+/* [END] INPUT FIND PROFILE */
+
+/* [START] LIST PROFILE'S */
+.selectProfileList>ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0 0 10px 0;
+}
+.selectProfileList>ul>li {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #cacaca40;
+    transition: heigth 1s ease-in;
+    background: #cacaca70;
+    margin: 0 10px 0 10px;
+}
+.selectProfileList>ul>li:nth-child(2n) {
+    background: #cacaca50;
+}
+.selectableDefault {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 5px 0 5px 0;
+    margin: 0 10px 0 10px;
+    cursor: default !important;
+}
+.selectableNew {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px;
+    margin: 10px 10px 0 10px;
+    cursor: default !important;
+    background: transparent !important;
+    border: 0px solid transparent !important;
+}
+.selectableNew>div {
+    background: #cacaca50 !important;
+    cursor: pointer !important;
+}
+.selectProfileList>ul>li>img {
+    width: 50px;
+    height: 50px;
+    margin: 5px 0 5px 5px;
+}
+.selectProfileList>ul>li>span {
+    margin: 0 10px 0 10px;
+}
+/* [END] LIST PROFILE'S */
