@@ -26,6 +26,9 @@ a:hover {
     flex-wrap: wrap;
     margin: 0px !important;
 }
+.boxLinkHeaderSelectProfile {
+    position: relative;
+}
 .hello {
     margin: 10% 0 10% 0;
 }

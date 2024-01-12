@@ -1,6 +1,6 @@
 /* [START] GROUP SELECT PROFILE */
 .selectProfileGroup {
-    position: relative;
+    position: absolute;
     width: 100%;
     cursor: default;
     background: #fefefe;
