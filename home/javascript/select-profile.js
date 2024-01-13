@@ -1,5 +1,7 @@
 const elBody = document.getElementsByTagName('html')[0];
 const isHover = e => e.parentElement.querySelector(':hover') === e;
+const elSelectPreviewImg = document.querySelector('#selectProfilePreviewClick > img');
+const elSelectPreviewSpan = document.querySelector('#selectProfilePreviewClick > span');
 document.querySelector('#inputFilterSelectProfile').addEventListener('keyup', filterSelectProfile);
 function filterSelectProfile(e) {
     var input, filter, ul, li, liView, a, i, txtValue;
@@ -48,6 +50,15 @@ function hideSelectProfile() {
     elGroupFilter.classList.remove("actived");
     elFilter.classList.add("d-none");
     elList.classList.add("d-none");
+};
+function selectProfile(el) {
+    const elData = {
+        name: el.innerText,
+        img: el.firstElementChild.src
+    };
+    elSelectPreviewImg.setAttribute('src', elData.img);
+    elSelectPreviewSpan.innerHTML = elData.name;
+    hideSelectProfile();
 };
 elBody.onclick = function () {
     var elSelectProfileGroup = document.getElementById("selectProfileGroup");

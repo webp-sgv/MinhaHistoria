@@ -4,6 +4,7 @@
     width: 100%;
     cursor: default;
     background: #fefefe;
+    border: 1px solid gray;
     transition: box-shadow 0.1s ease-in;
 }
 .selectProfileGroup.actived {
@@ -23,12 +24,12 @@
     align-items: center;
     background: #fff;
     cursor: pointer;
-    margin: 0 0 10px 0;
+    margin: 0;
     padding: 5px 10px 5px 5px;
 }
 .selectProfilePreview>img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin: 0 10px 0 0;
 }
 .selectProfilePreview>i {

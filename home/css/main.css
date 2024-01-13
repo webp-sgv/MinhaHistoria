@@ -13,7 +13,8 @@ a:hover {
 
 .boxLinkHeader {
     display: flex;
-    justify-content: flex-end;
+    justify-content: end;
+    align-items: center;
 }
 .logo {
     width: 100px;
@@ -26,8 +27,13 @@ a:hover {
     flex-wrap: wrap;
     margin: 0px !important;
 }
+.boxHeaderTop {
+    padding: 20px 0 0 0 !important;
+}
 .boxLinkHeaderSelectProfile {
     position: relative;
+    margin: 0px;
+    padding: 0px !important;
 }
 .hello {
     margin: 10% 0 10% 0;
@@ -163,4 +169,7 @@ footer {
 }
 .footerMargin {
     margin: 0px !important;
+}
+.marqueDiv > * {
+    border: 1px solid red;
 }
