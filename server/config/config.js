@@ -8,5 +8,10 @@ const sqlQuery = require('../../db/config/query');
 const portApp = process.env.PORT || 8080;
 
 module.exports = function () {
+    app.use(express.static(path.join(__dirname, '../public')));
+    app.set('views', path.join(__dirname, '../public'));
+    app.engine('html', require('ejs').renderFile);
+    app.set('view engine', 'html');
 
+    server.listen(portApp);
 };
