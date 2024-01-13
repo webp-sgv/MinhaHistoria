@@ -11,6 +11,7 @@ function filterSelectProfile(e) {
     ul = document.getElementById("ulFilterSelectProfile");
     li = ul.querySelectorAll('li.selectable');
     liView = li.length;
+    
     for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("span")[0];
         try {
@@ -25,12 +26,11 @@ function filterSelectProfile(e) {
             li[i].style.display = "none";
         }
     }
+
     if (!liView) {
         liDefaultListProfile.classList.remove("d-none");
-        console.log("View dont element");
     } else {
         liDefaultListProfile.classList.add("d-none");
-        console.log("View has element");
     }
 };
 function showSelectProfile() {
