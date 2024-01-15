@@ -4,6 +4,7 @@ node_modules
 
 # DB
 db/storage/sandbox.db
+db/sql
 
 # PUBLIC
 public/curriculo
