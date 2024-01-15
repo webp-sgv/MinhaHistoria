@@ -25,7 +25,15 @@ a:hover {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin: 0px !important;
+    margin: 0 !important;
+}
+.rowAdjustContact {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 100px 0 100px 0 !important;
 }
 .boxHeaderTop {
     padding: 20px 0 0 0 !important;
@@ -67,7 +75,7 @@ a:hover {
     color: darkgray;
 }
 .portfolio {
-    margin-top: 100px;
+    margin: 100px 0 100px 0;
 }
 .caixadefora {
     background-color: white;

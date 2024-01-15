@@ -1,0 +1,28 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+/* [START] DIV ROOT CONTACTME */
+.groupFormContactMe {
+  cursor: default;
+}
+/* [END] DIV ROOT CONTACTME */
+
+/* [START] DIV MASTER CONTROLE CONTACTME */
+.divMasterUlControleContactMe {
+  padding: 15px;
+}
+/* [END] DIV MASTER CONTROLE CONTACTME */
+
+/* [START] UL CONTROLE CONTACTME */
+.ulCardContactMe>li:not(:last-child) {
+  margin: 0 5px 0 0;
+}
+/* [END] UL CONTROLE CONTACTME */
+
+/* [START] CARD ASK NEW MSG */
+.cardAskNewMsgI > i:not(:last-child) {
+  margin: 0 20px 0 0;
+}
+.cardAskNewMsgI > i:hover {
+  cursor: pointer;
+}
+/* [END] CARD ASK NEW MSG */
