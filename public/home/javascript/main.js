@@ -7,4 +7,4 @@ socket.on('listProfiles', function(data) {
 
 setTimeout(() => {
     socket.emit('getProfiles', {});
-}, 1000);
+}, 1);
