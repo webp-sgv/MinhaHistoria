@@ -1,9 +1,13 @@
+# VSCODE
+.vscode
+
 # APP
 node_modules
 .env.local
 
 # DB
 db/storage/sandbox.db
+db/storage/SandBox.session.sql
 db/sql
 
 # PUBLIC

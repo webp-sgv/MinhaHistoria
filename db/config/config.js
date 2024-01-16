@@ -6,7 +6,7 @@ const base = process.env.PORT ? 'live.db' : 'sandbox.db';
 
 const dataBase = async () => {
     const db = await open({
-        filename: `db/${base}`,
+        filename: `db/storage/${base}`,
         driver: sqlite3.cached.Database
     });
     return db;

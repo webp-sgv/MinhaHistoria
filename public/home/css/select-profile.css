@@ -4,7 +4,6 @@
     width: 100%;
     cursor: default;
     background: #fefefe;
-    border: 1px solid gray;
     transition: box-shadow 0.1s ease-in;
 }
 .selectProfileGroup.actived {
