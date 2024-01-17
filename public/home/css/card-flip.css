@@ -33,39 +33,9 @@
         margin-bottom: 0;
     }
 }
-.card-group-flip>div:nth-child(1) {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    padding: 5px 0 5px 5px;
-    font-size: 8pt;
-    color: #ff800080;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0) 100%);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.card-group-flip>img:nth-child(2) {
+.card-group-flip>img:nth-child(1) {
     width: 100%;
     height: 100%;
-}
-.card-group-flip>div:nth-child(3) {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    bottom: 0;
-    right: 0;
-    padding: 5px 5px 5px 5px;
-    font-size: 8pt;
-    color: #ff8000;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0) 100%);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 /* [END] CARD ME TEXT GROUP */
 

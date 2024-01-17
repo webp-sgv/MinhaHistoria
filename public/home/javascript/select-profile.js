@@ -1,9 +1,12 @@
 const elBody = document.getElementsByTagName('html')[0];
 const isHover = e => e.parentElement.querySelector(':hover') === e;
 const ulProfile = document.getElementById("ulFilterSelectProfile");
+const elImgPreviewSelect = document.getElementById('imgPreviewSelect');
+const elNomePreviewSelect = document.getElementById('nomePreviewSelect');
 const elSelectPreviewImg = document.querySelector('#selectProfilePreviewClick > img');
 const elSelectPreviewSpan = document.querySelector('#selectProfilePreviewClick > span');
 document.querySelector('#inputFilterSelectProfile').addEventListener('keyup', filterSelectProfile);
+
 async function clearAllProfile() {
     ulProfile.innerHTML = "";
     return true;
@@ -17,7 +20,7 @@ async function appendChildProfile(data) {
         </li>
     `;
 };
-async function appendChildControlProfile () {
+async function appendChildControlProfile() {
     ulProfile.innerHTML += `
         <li id="liDefaultSelectedNone" class="selectableDefault text-truncate d-none">
             <span>Nenhum registro encontrado</span>
@@ -30,8 +33,10 @@ async function appendChildControlProfile () {
         </li>
     `;
 };
-async function setFirtProfile() {
-
+async function setFirtProfile(data) {
+    const { foto, nome, sobrenome } = data;
+    elImgPreviewSelect.setAttribute('src', foto);
+    elNomePreviewSelect.innerHTML = `${nome} ${sobrenome ? sobrenome : ''}`;
 }
 function filterSelectProfile(e) {
     var input, filter, ul, li, liView, a, i, txtValue;
@@ -83,19 +88,48 @@ function hideSelectProfile() {
 };
 function selectProfile(el) {
     const elData = {
-        id: el.getAttribute('data-id'),
-        name: el.innerText,
-        img: el.firstElementChild.src,
+        identificador: el.getAttribute('data-id'),
+        nome: el.innerText,
+        foto: el.firstElementChild.src,
         key: el.getAttribute('data-key')
     };
     sessionStorage.setItem('profileSelected', JSON.stringify(elData));
-    elSelectPreviewImg.setAttribute('src', elData.img);
-    elSelectPreviewSpan.innerHTML = elData.name;
+    elSelectPreviewImg.setAttribute('src', elData.foto);
+    elSelectPreviewSpan.innerHTML = elData.nome;
     hideSelectProfile();
 };
 async function dirProfile(data) {
+
     await clearAllProfile();
-    for (let i=0; i<data.length; i++) {
+    let firstProfile = JSON.parse(sessionStorage.getItem('profileSelected'));
+    let dataHello = JSON.parse(sessionStorage.getItem('getHello'));
+    let dataAbout = JSON.parse(sessionStorage.getItem('getAbout'));
+
+    for (let i = 0; i < data.length; i++) {
+        if (i == 0) {
+
+            if (firstProfile) {
+                setFirtProfile(firstProfile);
+            } else {
+                setFirtProfile(data[i]);
+            };
+
+            if (dataHello) {
+                ageSetHello(dataHello);
+            } else {
+                socket.emit('getHello', data[i]);
+            };
+
+            if (dataAbout) {
+                pageSetAbout(dataAbout);
+            } else {
+                socket.emit('getAbout', data[i]);
+            };
+
+            socket.emit('getPictures', data[i]);
+            
+        }
+
         appendChildProfile(data[i]);
     };
     appendChildControlProfile();

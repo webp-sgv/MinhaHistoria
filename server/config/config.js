@@ -6,9 +6,10 @@ const cookieSession = require("cookie-session");
 const io = require('socket.io')(server);
 const sqlite = require('../../db/config/config'); // CONEXAO COM O BANCO LOCAL
 const sqlQuery = require('../../db/config/query');
+const fs = require('fs/promises');
+const directoryPath = path.join(__dirname, '../../public/home/img/');
 const portApp = process.env.PORT || 8080;
 
-// execulta query
 async function execulteQuery(command, params) {
     const conn = new sqlite();
     const query = new sqlQuery();
@@ -32,7 +33,52 @@ async function listProfile() {
     const params = {};
     const filds = await execulteQuery(query, params);
     return filds;
-}
+};
+
+async function getHello(data) {
+    const { identificador } = data;
+    const query = `
+        SELECT
+        titulo,
+        subtitulo,
+        tituloBotao,
+        urlBotao
+        FROM hello 
+        WHERE perfil_id = $identificador
+        LIMIT 1;
+    `;
+    const params = {
+        "$identificador": identificador
+    };
+    const filds = await execulteQuery(query, params);
+    return filds;
+};
+
+async function getAbout(data) {
+    const { identificador } = data;
+    const query = `
+        SELECT
+        titulo,
+        subtitulo
+        FROM aboutText 
+        WHERE perfil_id = $identificador
+        LIMIT 1;
+    `;
+    const params = {
+        "$identificador": identificador
+    };
+    const filds = await execulteQuery(query, params);
+    return filds;
+};
+
+async function getPicturesProfile(data) {
+    const { nome, sobrenome } = data;
+    const result = await fs.readdir(directoryPath + `${nome}.${sobrenome}/profile`);
+    let newObj = {};
+    newObj.path = `${nome}.${sobrenome}`;
+    newObj.list = result;
+    return newObj;
+};
 
 module.exports = function () {
 
@@ -61,6 +107,21 @@ module.exports = function () {
         socket.on('getProfiles', async (data) => {
             const profiles = await listProfile();
             socket.emit('listProfiles', profiles);
+        });
+
+        socket.on('getHello', async (data) => {
+            const hello = await getHello(data);
+            socket.emit('dataHello', hello);
+        });
+
+        socket.on('getAbout', async(data) => {
+            const about = await getAbout(data);
+            socket.emit('dataAbout', about);
+        });
+
+        socket.on('getPictures', async (data) => {
+            const picture = await getPicturesProfile(data);
+            socket.emit('dataPictures', picture);
         });
 
         socket.on('disconnect', () => {

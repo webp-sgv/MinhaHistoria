@@ -13,12 +13,8 @@
     <link rel="stylesheet" href="home/css/bootstrap.css">
     <link rel="stylesheet" href="home/css/select-profile.css">
     <link rel="stylesheet" href="home/css/card-contactme.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <script src="home/javascript/cash.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -42,8 +38,8 @@
                         <!-- CURRENT PROFILE -->
                         <div id="selectProfilePreviewClick" class="selectProfilePreview rounded-5"
                             onclick="showSelectProfile()">
-                            <img class="rounded-5 border border-4" src="home/img/jean/profile/jean2.jpg" />
-                            <span class="text-truncate">Jean Cleidson</span>
+                            <img id="imgPreviewSelect" class="rounded-5 border border-4" src="" onerror="this.src='home/img/default/profile/circle_default.png'" />
+                            <span id="nomePreviewSelect" class="text-truncate">Carregando...</span>
                             <i class="bi bi-caret-down-fill"></i>
                         </div>
 
@@ -57,28 +53,9 @@
 
                         <!-- LIST PROFILE -->
                         <div id="selectProfileList" class="selectProfileList d-none">
-                            <ul id="ulFilterSelectProfile">
-                                <li class="selectable" onclick="selectProfile(this)">
-                                    <img src="home/img/stefane/profile/stefane1.jpg"
-                                        class="rounded-5 border border-4" />
-                                    <span class="name text-truncate">Stefane Rose</span>
-                                </li>
-                                <li class="selectable" onclick="selectProfile(this)">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFrfJVTKzJRt-gXEXgEhtxzpj5Zo_JekrSFK_zsfcvtam9B0VggU8bM3XkJUjp3z8dT_8&usqp=CAU"
-                                        class="rounded-5 border border-4" />
-                                    <span class="name text-truncate">Default</span>
-                                </li>
-                                <li id="liDefaultSelectedNone" class="selectableDefault text-truncate d-none">
-                                    <span>Nenhum registro encontrado</span>
-                                </li>
-                                <li id="liNewSelectedNone" class="selectableNew text-truncate">
-                                    <div class="p-2 rounded-5" data-bs-toggle="modal" data-bs-target="#modalCodeExists">
-                                        <span>Criar um perfil</span>
-                                        <i class="bi bi-database-fill-add"></i>
-                                    </div>
-                                </li>
-                            </ul>
+                            <ul id="ulFilterSelectProfile"></ul>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -88,7 +65,7 @@
             <div class="text-center">
                 <h4 id="titulo1">Carregando...</h4>
                 <h1 id="titulo2">Carregando...</h1>
-                <button href="https://wa.me/5564984032553" class="btn btn-dark butao" id="butaoservices">Carregando...</button>
+                <a href="" class="btn btn-dark butao" id="butaoservices">Carregando...</a>
             </div>
         </div>
 
@@ -96,24 +73,37 @@
             <div class="row container mx-auto">
 
                 <div class="textoabout col-lg-9 col-md-12 col-xs-12">
-                    <h4>Carregando...</h4>
+                    <h4 id="tituloAbout">Carregando...</h4>
                     <div class="rectangle"></div>
-                    <p>
+                    <p id="subtituloAbout">
                         Carregando...
                     </p>
                 </div>
 
                 <div class="boxFlipCard col-lg-3 col-md-12 col-xs-12">
-                    <ul class="cards-group-flip">
+                    <ul id="flipCardAboutImgProfile" class="cards-group-flip">
                         <li class="card-group-flip">
-                            <div>Goiânia - Go</div>
-                            <img src="home/img/jean/profile/jean1.jpg"></img>
-                            <div>01-01-2023</div>
+                            <img src="home/img/Jean.Cleidson/profile/jean1.jpg">
                         </li>
+                    
                         <li class="card-group-flip">
-                            <div>Caldas Novas - Go</div>
-                            <img src="home/img/jean/profile/jean2.jpg"></img>
-                            <div>17-03-2018</div>
+                            <img src="home/img/Jean.Cleidson/profile/jean2.jpg">
+                        </li>
+                    
+                        <li class="card-group-flip">
+                            <img src="home/img/Jean.Cleidson/profile/jean3.jpeg">
+                        </li>
+                    
+                        <li class="card-group-flip">
+                            <img src="home/img/Jean.Cleidson/profile/jean4.jpeg">
+                        </li>
+                    
+                        <li class="card-group-flip">
+                            <img src="home/img/Jean.Cleidson/profile/jean5.jpeg">
+                        </li>
+                    
+                        <li class="card-group-flip">
+                            <img src="home/img/Jean.Cleidson/profile/jean6.jpeg">
                         </li>
                     </ul>
                 </div>
@@ -308,8 +298,9 @@
 
         <script src="home/javascript/socket.js"></script>
         <script src="home/javascript/main.js"></script>
-        <script src="home/javascript/flip-card.js"></script>
         <script src="home/javascript/select-profile.js"></script>
+        <script src="home/javascript/page.js"></script>
+        <script src="home/javascript/flip-card.js"></script>
 
     </div>
 
