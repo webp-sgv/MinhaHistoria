@@ -21,6 +21,11 @@ socket.on('dataPictures', function(data) {
     pageSetListFlipCard(data);
 });
 
+socket.on('dataWorks', function(data) {
+    sessionStorage.setItem('dataWorks', JSON.stringify(data));
+    pageSetWorks(data);
+});
+
 setTimeout(() => {
     socket.emit('getProfiles', {});
 }, 500);

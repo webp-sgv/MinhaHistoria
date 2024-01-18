@@ -80,6 +80,22 @@ async function getPicturesProfile(data) {
     return newObj;
 };
 
+async function getWorks(data) {
+    const { nome, sobrenome } = data;
+    const dir = await fs.readdir(directoryPath + `${nome}.${sobrenome}/works`);
+    let newObj = {};
+    let objArrayFiles = [];
+
+    for (row in dir) {
+        const files = await fs.readdir(directoryPath + `${nome}.${sobrenome}/works/${dir[row]}`);
+        objArrayFiles.push({ path: dir[row], list: files });
+    }
+
+    newObj.path = `${nome}.${sobrenome}`;
+    newObj.list = objArrayFiles;
+    return newObj;
+}
+
 module.exports = function () {
 
     app.use(express.static(path.join(__dirname, '../../public')));
@@ -114,7 +130,7 @@ module.exports = function () {
             socket.emit('dataHello', hello);
         });
 
-        socket.on('getAbout', async(data) => {
+        socket.on('getAbout', async (data) => {
             const about = await getAbout(data);
             socket.emit('dataAbout', about);
         });
@@ -122,6 +138,11 @@ module.exports = function () {
         socket.on('getPictures', async (data) => {
             const picture = await getPicturesProfile(data);
             socket.emit('dataPictures', picture);
+        });
+
+        socket.on('getWorks', async (data) => {
+            const works = await getWorks(data);
+            socket.emit('dataWorks', works);
         });
 
         socket.on('disconnect', () => {

@@ -102,8 +102,10 @@ async function dirProfile(data) {
 
     await clearAllProfile();
     let firstProfile = JSON.parse(sessionStorage.getItem('profileSelected'));
-    let dataHello = JSON.parse(sessionStorage.getItem('getHello'));
-    let dataAbout = JSON.parse(sessionStorage.getItem('getAbout'));
+    let dataHello = JSON.parse(sessionStorage.getItem('dataHello'));
+    let dataAbout = JSON.parse(sessionStorage.getItem('dataAbout'));
+    let dataPicture = JSON.parse(sessionStorage.getItem('dataPictures'));
+    let dataWorks = JSON.parse(sessionStorage.getItem('dataWorks'));
 
     for (let i = 0; i < data.length; i++) {
         if (i == 0) {
@@ -115,7 +117,7 @@ async function dirProfile(data) {
             };
 
             if (dataHello) {
-                ageSetHello(dataHello);
+                pageSetHello(dataHello);
             } else {
                 socket.emit('getHello', data[i]);
             };
@@ -126,7 +128,17 @@ async function dirProfile(data) {
                 socket.emit('getAbout', data[i]);
             };
 
-            socket.emit('getPictures', data[i]);
+            if (dataPicture) {
+                pageSetListFlipCard(dataPicture);
+            } else {
+                socket.emit('getPictures', data[i]);
+            };
+
+            if (dataWorks) {
+                pageSetWorks(dataWorks);
+            } else {
+                socket.emit('getWorks', data[i]);
+            };
             
         }
 

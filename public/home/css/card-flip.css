@@ -11,8 +11,8 @@
 
 /* [START] CARD ME TEXT GROUP */
 .card-group-flip {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 230px;
     border-radius: 5px;
     position: absolute;
     top: 0;
@@ -43,8 +43,8 @@
 /* [START] EFECT FLIP CARD */
 .card--next-flip {
     cursor: pointer !important;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 230px;
     z-index: 5;
     transform: translateY(-10px) rotate(4deg) translateX(25px) scale(1);
     white-space: nowrap;
@@ -53,8 +53,8 @@
 }
 .card--out-flip {
     cursor: pointer !important;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 230px;
     animation: card-out-flip 0.6s cubic-bezier(0.8, 0.2, 0.1, 0.8);
     transform: translateY(-30px) rotate(8deg) translateX(55px) scale(0.95);
     z-index: 1;
@@ -64,8 +64,9 @@
     text-overflow: ellipsis;
 }
 .card--current-flip {
-    width: 150px;
-    height: 150px;
+    cursor: pointer !important;
+    width: 200px;
+    height: 230px;
     cursor: auto;
     user-select: auto;
     position: relative;

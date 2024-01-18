@@ -1,1 +1,1 @@
-SELECT * FROM aboutText;
+SELECT * FROM contactPreview WHERE perfil_id = 1
