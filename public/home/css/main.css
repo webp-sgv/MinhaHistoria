@@ -42,7 +42,7 @@ a:hover {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin: 100px 0 100px 0 !important;
+    margin: 50px 0 50px 0 !important;
 }
 .boxHeaderTop {
     padding: 20px 0 0 0 !important;
@@ -54,11 +54,12 @@ a:hover {
 }
 .hello {
     margin: 10% 0 10% 0;
+    height: 50vh;
 }
 #aboutpart {
     background: linear-gradient(-90deg, #039688, #014aad);
     margin: 0;
-    padding: 100px 0 100px 0;
+    padding: 50px 0 50px 0;
     color: white;
 }
 .boxFlipCard {
@@ -84,7 +85,7 @@ a:hover {
     color: darkgray;
 }
 .portfolio {
-    margin: 100px 0 100px 0;
+    margin: 50px 0 50px 0;
 }
 .caixadefora {
     background-color: white;
@@ -192,7 +193,7 @@ a:hover {
     color: lightgrey;
 }
 .contactos {
-    margin: 100px 0 100px 0;
+    margin: 50px 0 50px 0;
     padding: 0px !important;
 }
 .mainSplashFormContact {
