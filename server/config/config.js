@@ -19,6 +19,73 @@ async function execulteQuery(command, params) {
     return resultQuery;
 };
 
+async function createTables() {
+    const query = `
+        CREATE TABLE IF NOT EXISTS perfil (
+            id integer PRIMARY KEY AUTOINCREMENT,
+            status integer DEFAULT 1,
+            avatar varchar(50) NOT NULL DEFAULT 'home/default/profile/default.svg',
+            nome varchar(50) not NULL,
+            sobrenome varchar(50) NOt NULL,
+            email varchar(100) UNIQUE NOT NULL,
+            telefone char(15) NOT NULL,
+            token char(73) NOT NULL,
+            createat datetime NOT NULL DEFAULT (datetime('now','localtime')),
+            reset_token integer NOT NULL DEFAULT 0
+        );
+        
+        CREATE TABLE IF NOT EXISTS redes (
+            id integer PRIMARY key AUTOINCREMENT,
+            perfil_id integer NOT NULL,
+            nome varchar(20) NOT NULL,
+            tipo char(20) NOT NULL,
+            nomeDownload char(20),
+            url varchar(100) UNIQUE NOT NULL,
+            icone char(20) NOT NULL,
+            status integer DEFAULT 1,
+            createat datetime DEFAULT (datetime('now','localtime'))
+        );
+        
+        CREATE TABLE IF NOT EXISTS hello (
+            id integer PRIMARY KEY AUTOINCREMENT,
+            perfil_id integer NOT NULL,
+            titulo varchar(50) NOT NULL,
+            subtitulo varchar(50) NOT NULL,
+            tituloBotao varchar(50) NOT NULL,
+            urlBotao varchar(100) NOT NULL
+        );
+        
+        CREATE TABLE IF NOT EXISTS aboutText (
+            id integer PRIMARY KEY AUTOINCREMENT,
+            perfil_id integer NOT NULL,
+            titulo varchar(50) NOT NULL,
+            subtitulo text NOT NULL,
+            createat datetime NOT NULL DEFAULT (datetime('now','localtime'))
+        );
+        
+        CREATE TABLE IF NOT EXISTS contactPreview (
+            id integer PRIMARY KEY AUTOINCREMENT,
+            perfil_id integer NOT NULL,
+            titulo varchar(50) NOT NULL,
+            subtitulo varchar(100) NOT NULL,
+            tipo char(10) NOT NULL,
+            createat datetime DEFAULT (datetime('now','localtime'))
+        );
+        
+        CREATE TABLE IF NOT EXISTS contactForm (
+            id integer PRIMARY KEY AUTOINCREMENT,
+            perfil_id integer NOT NULL,
+            remetente varchar(100) NOT NULL,
+            email_remetente varchar(100) NOT NULL,
+            texto varchar(300) NOT NULL,
+            createat datetime DEFAULT (datetime('now','localtime'))
+        );
+    `;
+    const params = {};
+    const filds = await execulteQuery(query, params);
+    return filds;
+};
+
 async function listProfile() {
     const query = `
         SELECT
@@ -190,7 +257,7 @@ async function saveContactForm(data) {
 
 }
 
-module.exports = function () {
+module.exports = async function () {
 
     app.use(express.static(path.join(__dirname, '../../public')));
     app.set('views', path.join(__dirname, '../../public'));
@@ -205,6 +272,8 @@ module.exports = function () {
         ],
         maxAge: 24 * 60 * 60 * 1000
     }));
+
+    await createTables();
 
     var hosts = 0;
     var sockets = [];
