@@ -1,7 +1,7 @@
 /* [START] GROUP SELECT PROFILE */
 .selectProfileGroup {
     position: absolute;
-    width: 100%;
+    width: fit-content;
     cursor: default;
     background: #fefefe;
     transition: box-shadow 0.1s ease-in;
@@ -24,12 +24,12 @@
     background: #fff;
     cursor: pointer;
     margin: 0;
-    padding: 5px 10px 5px 5px;
+    padding: 5px;
 }
 .selectProfilePreview>img {
     width: 40px;
     height: 40px;
-    margin: 0 10px 0 0;
+    margin: 0px;
 }
 .selectProfilePreview>i {
     transition: transform .1s ease-in;
