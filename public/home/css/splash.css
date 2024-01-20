@@ -1,0 +1,50 @@
+.masterSplashLoad {
+    position: relative;
+}
+.masterSplashTextTop {
+    position: absolute;
+    width: 370px;
+    height: 370px;
+    left: -60px;
+    top: -60px;
+    animation: splash-fade-in .8s ease-in-out;
+}
+.masterSplashTextBottom {
+    position: absolute;
+    width: 350px;
+    height: 360px;
+    left: -50px;
+    bottom: -76px;
+    animation: splash-fade-in 1s ease-in-out;
+}
+.masterSplashFigure {
+    animation: splash-rotate-in 1.5s ease-in-out;
+}
+
+@keyframes splash-rotate-in {
+    0% {
+        transform: rotate(-180deg) scale(0.0);
+    }
+    90% {
+        transform: rotate(90deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes splash-fade-in {
+    0% {
+        z-index: -2;
+        transform: rotate(-10deg) scale(0.1);
+        opacity: 0;
+    }
+    80% {
+        transform: rotate(10deg) scale(1);
+    }
+    100% {
+        z-index: 1;
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
