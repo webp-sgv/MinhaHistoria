@@ -257,7 +257,7 @@ async function saveContactForm(data) {
 
 }
 
-module.exports = async function () {
+module.exports = function () {
 
     app.use(express.static(path.join(__dirname, '../../public')));
     app.set('views', path.join(__dirname, '../../public'));
@@ -273,7 +273,11 @@ module.exports = async function () {
         maxAge: 24 * 60 * 60 * 1000
     }));
 
-    await createTables();
+    async function startDb() {
+        await createTables();
+    }
+
+    startDb();
 
     var hosts = 0;
     var sockets = [];
