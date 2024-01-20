@@ -9,6 +9,7 @@ const sqlQuery = require('../../db/config/query');
 const fs = require('fs/promises');
 const directoryPath = path.join(__dirname, '../../public/home/img/');
 const portApp = process.env.PORT || 8080;
+let lastRecivedContactForm;
 
 async function execulteQuery(command, params) {
     const conn = new sqlite();
@@ -96,6 +97,99 @@ async function getWorks(data) {
     return newObj;
 }
 
+async function getContactPreview(data) {
+    const { identificador } = data;
+    const query = `
+        SELECT
+        *
+        FROM
+        contactPreview
+        WHERE perfil_id = $identificador
+        LIMIT 5;
+    `;
+    const params = {
+        "$identificador": identificador
+    };
+    const filds = await execulteQuery(query, params);
+    return filds;
+};
+
+async function getContactFormData(data) {
+    const { identificador, email } = data;
+    const query = `
+        SELECT
+        *
+        FROM contactForm
+        WHERE perfil_id = $identificador
+        AND email_remetente = $email
+        ORDER BY id DESC
+        LIMIT 10;
+    `;
+    const params = {
+        "$identificador": identificador,
+        "$email": email
+    };
+    const filds = await execulteQuery(query, params);
+    return filds;
+};
+
+async function saveContactForm(data) {
+    
+    if (lastRecivedContactForm == data) {
+        return {
+            "status": 404,
+            "response": "pedido duplicado, revise os dados!"
+        }
+    };
+
+    const { nome, email, texto, identificador } = data;
+
+    const select = `
+        SELECT
+        COUNT(*) AS 'TOTAL'
+        FROM
+        contactForm
+        WHERE perfil_id = $identificador
+        AND remetente = $nome
+        AND email_remetente = $email
+        AND texto = $texto
+    `;
+    const insert = `
+        INSERT INTO contactForm (
+            perfil_id,
+            remetente,
+            email_remetente,
+            texto
+        ) VALUES (
+            $identificador,
+            $nome,
+            $email,
+            $texto
+        );
+    `;
+    const params = {
+        "$nome": nome,
+        "$email": email,
+        "$texto": texto,
+        "$identificador": identificador
+    };
+    const fildsSelect = await execulteQuery(select, params);
+    
+    if (fildsSelect[0]['TOTAL'] < 1) {
+        const fildsInsert = await execulteQuery(insert, params);
+        return {
+            "status": 200,
+            "response": "Registro criado com sucesso."
+        };
+    } else {
+        return {
+            "status": 500,
+            "response": "Registro já existe, verifique os dados e tente novamente!"
+        }
+    };
+
+}
+
 module.exports = function () {
 
     app.use(express.static(path.join(__dirname, '../../public')));
@@ -116,6 +210,7 @@ module.exports = function () {
     var sockets = [];
 
     io.on('connection', socket => {
+
         hosts++; // QUANDO UM SE CONECTAR A SESSAO
         sockets.push({ id: socket.id });
         console.log(`O usuario: ${socket.id} entrou`);
@@ -145,12 +240,28 @@ module.exports = function () {
             socket.emit('dataWorks', works);
         });
 
+        socket.on('getContactPreview', async (data) => {
+            const contact = await getContactPreview(data);
+            socket.emit('dataContactPreview', contact);
+        });
+
+        socket.on('getContactForm', async(data) => {
+            const contactForm = await getContactFormData(data);
+            socket.emit('dataContactForm', contactForm);
+        });
+
+        socket.on('saveContactForm', async (data) => {
+            const saveContact = await saveContactForm(data);
+            socket.emit('responseSaveContactForm', saveContact);
+        });
+
         socket.on('disconnect', () => {
             hosts--; // QUANDO UM SE DESCONECTAR DA SESSAO
             const newObj = sockets.filter((key) => key.id !== socket.id);
             sockets = newObj;
             console.log(`O usuario: ${socket.id} saiu`);
         });
+
     });
 
     server.listen(portApp);

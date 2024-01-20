@@ -11,6 +11,15 @@ a:hover {
     text-decoration: none;
 }
 
+.caixasplash {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+.caixasplashcenter {
+    height: 100vh;
+}
+
 .boxLinkHeader {
     display: flex;
     justify-content: end;
@@ -53,7 +62,7 @@ a:hover {
     color: white;
 }
 .boxFlipCard {
-    height: 100%;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,6 +100,26 @@ a:hover {
     height: 100%;
     min-width: 50px;
     padding: 10px !important;
+}
+.trabalhos:hover > .iconNextAndBack {
+    animation: show-aba-controle-works .3s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+.trabalhos:hover > .spanType {
+    animation: show-aba-controle-works .5s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+.iconNextAndBack {
+    animation: hide-aba-controle-works .3s ease-in-out;
+    opacity: 0;
+    transform: translateY(-18px);
+}
+.spanType {
+    animation: hide-aba-controle-works .3s ease-in-out;
+    opacity: 0;
+    transform: translateY(-18px);
 }
 .trabalhos > .spanType {
     position: absolute;
@@ -166,6 +195,24 @@ a:hover {
     margin: 100px 0 100px 0;
     padding: 0px !important;
 }
+.mainSplashFormContact {
+    position: relative;
+}
+.splashFormContact {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    transition: background .5s ease-in-out;
+    background: hsl(0 0% 100% / 0.8);
+    backdrop-filter: blur(var(--blur));
+}
+.contentSplashFormContact {
+    width: 100%;
+    height: 100%;
+}
 #titulo1 {
     font-family: 'Open Sans', sans-serif;
 }
@@ -226,4 +273,28 @@ footer {
 }
 .marqueDiv > * {
     border: 1px solid red;
+}
+
+@keyframes show-aba-controle-works {
+    0% {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+@keyframes hide-aba-controle-works {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
 }

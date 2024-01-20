@@ -1,9 +1,11 @@
+const elListContactForm = document.getElementById("listContactForm");
+
 function pageSetHello(data) {
     let { titulo, subtitulo, tituloBotao, urlBotao } = data[0];
     let elTitulo = document.getElementById("titulo1");
     let elSubtitulo = document.getElementById("titulo2");
     let elBotao = document.getElementById("butaoservices");
-    
+
     elTitulo.innerHTML = titulo;
     elSubtitulo.innerHTML = subtitulo;
     elBotao.innerHTML = tituloBotao;
@@ -43,11 +45,27 @@ function pageSetWorks(data) {
                     src="home/img/${path}/works/${list[key]['path']}/1.png"
                     onerror="this.src='home/img/aplication/png/default work.png'" />
 
+                <div>Arraste o mouse</div>
             </div>
         `;
-        console.log(list[key])
     };
 
+};
+
+function pageSetContactPreview(data) {
+    const elDivContactPreview = document.getElementById("boxContactPreview");
+    elDivContactPreview.innerHTML = "";
+    for (key in data) {
+        const { id, titulo, subtitulo, tipo, createat } = data[key];
+        elDivContactPreview.innerHTML += `
+            <div id="${id}.${titulo}.${tipo}">
+                <h5>${titulo}</h5>
+                <p>${subtitulo}</p>
+                <p></p>
+                <p></p>
+            </div>
+        `;
+    }
 };
 
 function pageSetListFlipCard(data) {
@@ -63,6 +81,55 @@ function pageSetListFlipCard(data) {
     return true;
 };
 
+function pageListContactForm(data) {
+    elListContactForm.innerHTML = "";
+    if (data.length < 1) {
+        elListContactForm.innerHTML += `
+            <a class="contactForm list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1" style="width: 100%;">
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-6 rounded-2" style="height: 10px;"></span>
+                        </p>
+                    </h5>
+                    <small style="width: 100%;">
+                        <p class="card-text placeholder-glow" style="text-align: end;">
+                            <span class="placeholder col-4 rounded-2" style="height: 10px;"></span>
+                        </p>
+                    </small>
+                </div>
+                <p class="mb-1" style="width: 100%;">
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-7 rounded-2" style="height: 10px;"></span>
+                    </p>
+                </p>
+            </a>
+        `;
+        return true;
+    }
+
+    for (row in data) {
+        const { id, remetente, email_remetente, texto, createat } = data[row];
+        elListContactForm.innerHTML += `
+            <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${remetente}</h5>
+                    <small>${moment(new Date(createat)).locale('pt-br').fromNow()}</small>
+                </div>
+                <p class="mb-1">${texto}</p>
+            </a>
+        `;
+    };
+};
+
+function hideSplashLoad() {
+    const elSplashLoad = document.getElementsByClassName("caixasplash")[0];
+    const elCaixaDeFora = document.getElementsByClassName("caixadefora")[0];
+    elSplashLoad.classList.add("d-none");
+    elCaixaDeFora.classList.remove("d-none");
+
+};
+
 function arrowControleWorks(el) {
     let dataDirButton = el.getAttribute("data-dir");
     let dataAgentButton = el.getAttribute("data-agent");
@@ -74,7 +141,7 @@ function arrowControleWorks(el) {
     let dataSessionWorks = JSON.parse(sessionStorage.getItem("dataWorks"));
     let baseUrl = `home/img/${dataAgentButton}/works/${dataDirButton}/`;
     let dataCacheWorks = dataSessionWorks['list'].filter(index => index.path == dataDirButton)[0]['list']; // [ {...} ]
-    
+
     if (dataTypeButton == 'left' && dataIndexImg == 0) {
         el.classList.remove("bi-arrow-left-circle-fill");
         el.classList.add('bi-arrow-left-circle');
@@ -109,3 +176,61 @@ function arrowControleWorks(el) {
         elImgDir.setAttribute("src", baseUrl + dataCacheWorks[(parseInt(dataIndexImg) - 1)]);
     }
 };
+
+function pageCreateSplashContactForm() {
+    elListContactForm.innerHTML = "";
+    elListContactForm.innerHTML += `
+        <a class="contactForm list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" style="width: 100%;">
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-6 rounded-2" style="height: 10px;"></span>
+                    </p>
+                </h5>
+                <small style="width: 100%;">
+                    <p class="card-text placeholder-glow" style="text-align: end;">
+                        <span class="placeholder col-4 rounded-2" style="height: 10px;"></span>
+                    </p>
+                </small>
+            </div>
+            <p class="mb-1" style="width: 100%;">
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7 rounded-2" style="height: 10px;"></span>
+                </p>
+            </p>
+        </a>
+
+        <a class="contactForm list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" style="width: 100%;">
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-4 rounded-2" style="height: 10px;"></span>
+                    </p>
+                </h5>
+                <small style="width: 100%;">
+                    <p class="card-text placeholder-glow" style="text-align: end;">
+                        <span class="placeholder col-4 rounded-2" style="height: 10px;"></span>
+                    </p>
+                </small>
+            </div>
+            <p class="mb-1" style="width: 100%;">
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-6 rounded-2" style="height: 10px;"></span>
+                </p>
+            </p>
+        </a>
+    `;
+};
+
+async function pageRefreshListContactForm() {
+    const elInputEmail = document.getElementById("validationCustomYouEmail");
+    const identificador = await getIdentificadorProfile();
+
+    let newObj = {};
+    newObj.identificador = identificador;
+    newObj.email = elInputEmail.value;
+
+    pageCreateSplashContactForm();
+
+    socket.emit('getContactForm', newObj);
+}

@@ -1,1 +1,1 @@
-SELECT * FROM contactPreview WHERE perfil_id = 1
+DELETE FROM contactForm

@@ -25,7 +25,7 @@ async function appendChildControlProfile() {
         <li id="liDefaultSelectedNone" class="selectableDefault text-truncate d-none">
             <span>Nenhum registro encontrado</span>
         </li>
-        <li id="liNewSelectedNone" class="selectableNew text-truncate">
+        <li id="liNewSelectedNone" class="selectableNew text-truncate d-none">
             <div class="p-2 rounded-5" data-bs-toggle="modal" data-bs-target="#modalCodeExists">
                 <span>Criar um perfil</span>
                 <i class="bi bi-database-fill-add"></i>
@@ -98,6 +98,10 @@ function selectProfile(el) {
     elSelectPreviewSpan.innerHTML = elData.nome;
     hideSelectProfile();
 };
+function getIdentificadorProfile() {
+    const { identificador } = !JSON.parse(sessionStorage.getItem('profileSelected')) ? { "identificador": 1 } : JSON.parse(sessionStorage.getItem('profileSelected'));
+    return identificador;
+}
 async function dirProfile(data) {
 
     await clearAllProfile();
@@ -106,6 +110,7 @@ async function dirProfile(data) {
     let dataAbout = JSON.parse(sessionStorage.getItem('dataAbout'));
     let dataPicture = JSON.parse(sessionStorage.getItem('dataPictures'));
     let dataWorks = JSON.parse(sessionStorage.getItem('dataWorks'));
+    let dataContactPreview = JSON.parse(sessionStorage.getItem('dataContactPreview'));
 
     for (let i = 0; i < data.length; i++) {
         if (i == 0) {
@@ -139,6 +144,13 @@ async function dirProfile(data) {
             } else {
                 socket.emit('getWorks', data[i]);
             };
+
+            if (dataContactPreview) {
+                pageSetContactPreview(dataContactPreview);
+                hideSplashLoad();
+            } else {
+                socket.emit('getContactPreview', data[i]);
+            }
             
         }
 

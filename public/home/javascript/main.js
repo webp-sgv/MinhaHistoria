@@ -1,5 +1,6 @@
 var host = window.location.hostname;
 var socket = io(window.location.protocol == 'https:' ? host : window.host + ':8080');
+moment.locale = "pt-br";
 
 socket.on('listProfiles', function(data) {
     sessionStorage.setItem('listProfiles', JSON.stringify(data));
@@ -26,6 +27,22 @@ socket.on('dataWorks', function(data) {
     pageSetWorks(data);
 });
 
+socket.on('dataContactPreview', function(data) {
+    sessionStorage.setItem('dataContactPreview', JSON.stringify(data));
+    pageSetContactPreview(data);
+    hideSplashLoad();
+});
+
+socket.on('dataContactForm', function(data) {
+    sessionStorage.setItem('dataContactForm', JSON.stringify(data));
+    pageListContactForm(data);
+});
+
+socket.on('responseSaveContactForm', function(data) {
+    const elSplashLoad = document.getElementsByClassName("splashFormContact")[0];
+    elSplashLoad.classList.add("d-none");
+});
+
 setTimeout(() => {
     socket.emit('getProfiles', {});
-}, 500);
+}, 1000);
