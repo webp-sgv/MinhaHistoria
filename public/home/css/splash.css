@@ -23,7 +23,7 @@
 
 @keyframes splash-rotate-in {
     0% {
-        transform: rotate(-180deg) scale(0.0);
+        transform: rotate(-180deg) scale(0.5);
     }
     90% {
         transform: rotate(90deg) scale(1.1);
