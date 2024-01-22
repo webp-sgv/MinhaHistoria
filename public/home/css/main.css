@@ -129,15 +129,16 @@ a:hover {
     padding: 5px;
     color: #201607;
     transition: all .5s ease-in-out;
-    background: hsl(0 0% 100% / 0.2);
-    backdrop-filter: blur(var(--blur));
+    background: #ffffff9b;
+    backdrop-filter: blur(7px);
 }
 .trabalhos > .spanType > i {
     color: #039688;
 }
 .trabalhos > .spanType:hover {
     color: #e09628;
-    background: hsl(0 0% 100% / 0.8);
+    background: #ffffffc2;
+    backdrop-filter: blur(7px);
     cursor: default;
 }
 
@@ -147,11 +148,12 @@ a:hover {
     right: 20px;
     padding: 5px;
     transition: background .5s ease-in-out;
-    background: hsl(0 0% 100% / 0.2);
-    backdrop-filter: blur(var(--blur));
+    background: #ffffff9b;
+    backdrop-filter: blur(7px);
 }
 .trabalhos > .iconNextAndBack:hover {
-    background: hsl(0 0% 100% / 0.8);
+    background: #ffffffc2;
+    backdrop-filter: blur(7px);
 }
 .trabalhos > .iconNextAndBack > i {
     color: #014aad;

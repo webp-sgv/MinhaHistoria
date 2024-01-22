@@ -116,18 +116,21 @@ async function dirProfile(data) {
         if (i == 0) {
 
             if (firstProfile) {
+                countLoadPage += 1;
                 setFirtProfile(firstProfile);
             } else {
                 setFirtProfile(data[i]);
             };
 
             if (dataHello) {
+                countLoadPage += 1;
                 pageSetHello(dataHello);
             } else {
                 socket.emit('getHello', data[i]);
             };
 
             if (dataAbout) {
+                countLoadPage += 1;
                 pageSetAbout(dataAbout);
             } else {
                 socket.emit('getAbout', data[i]);
@@ -140,14 +143,17 @@ async function dirProfile(data) {
             };
 
             if (dataWorks) {
+                countLoadPage += 1;
                 pageSetWorks(dataWorks);
             } else {
                 socket.emit('getWorks', data[i]);
             };
 
             if (dataContactPreview) {
+                countLoadPage += 1;
                 pageSetContactPreview(dataContactPreview);
                 hideSplashLoad();
+                console.log({"tipo": "local end load", "data": countLoadPage});
             } else {
                 socket.emit('getContactPreview', data[i]);
             }
