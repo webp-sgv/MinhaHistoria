@@ -3,11 +3,13 @@ const path = require('path');
 const app = express();
 const server = require('http').createServer(app);
 const cookieSession = require("cookie-session");
+const session = require("express-session");
 const io = require('socket.io')(server);
 const sqlite = require('../../db/config/config'); // CONEXAO COM O BANCO LOCAL
 const sqlQuery = require('../../db/config/query');
 const fs = require('fs/promises');
 const directoryPath = path.join(__dirname, '../../public/home/img/');
+const CryptoJS = require("crypto-js");
 const portApp = process.env.PORT || 8080;
 let lastRecivedContactForm;
 
@@ -183,25 +185,41 @@ async function getContactPreview(data) {
 
 async function getContactFormData(data) {
     const { identificador, email } = data;
-    const query = `
-        SELECT
-        *
-        FROM contactForm
-        WHERE perfil_id = $identificador
-        AND email_remetente = $email
-        ORDER BY id DESC
-        LIMIT 10;
-    `;
-    const params = {
-        "$identificador": identificador,
-        "$email": email
-    };
+    
+    let query = "";
+    let params = {};
+
+    if (email == '*@mail.com') {
+        query = `
+            SELECT
+            *
+            FROM contactForm
+            ORDER BY id DESC
+            LIMIT 10;
+        `;
+    } else {
+        query = `
+            SELECT
+            *
+            FROM contactForm
+            WHERE perfil_id = $identificador
+            AND email_remetente = $email
+            ORDER BY id DESC
+            LIMIT 10;
+        `;
+        params = {
+            "$identificador": identificador,
+            "$email": email
+        };
+    }
+
     const filds = await execulteQuery(query, params);
+    console.log(filds)
     return filds;
 };
 
 async function saveContactForm(data) {
-    
+
     if (lastRecivedContactForm == data) {
         return {
             "status": 404,
@@ -241,7 +259,7 @@ async function saveContactForm(data) {
         "$identificador": identificador
     };
     const fildsSelect = await execulteQuery(select, params);
-    
+
     if (fildsSelect[0]['TOTAL'] < 1) {
         const fildsInsert = await execulteQuery(insert, params);
         return {
@@ -256,6 +274,12 @@ async function saveContactForm(data) {
     };
 
 }
+
+function encriptData(data) {
+    let secret = process.SECRET_ENCRYPT || 'JEAN CLEIDSON PEREIRA RODRIGUES';
+    let secretValue = CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString();
+    return secretValue;
+};
 
 module.exports = function () {
 
@@ -273,6 +297,15 @@ module.exports = function () {
         maxAge: 24 * 60 * 60 * 1000
     }));
 
+    const sessionMiddleware = session({
+        secret: "jean cleidson pereira rodrigues",
+        resave: false,
+        saveUninitialized: true,
+        // cookie: { secure: true, maxAge: 60000 }
+    });
+
+    app.use(sessionMiddleware);
+
     async function startDb() {
         await createTables();
     }
@@ -282,11 +315,14 @@ module.exports = function () {
     var hosts = 0;
     var sockets = [];
 
+    io.engine.use(sessionMiddleware);
+
     io.on('connection', socket => {
 
+        const req = socket.request;
         hosts++; // QUANDO UM SE CONECTAR A SESSAO
         sockets.push({ id: socket.id });
-        console.log(`O usuario: ${socket.id} entrou`);
+        console.log(`O usuario: ${socket.id} entrou ${JSON.stringify(req.session.count)}`);
 
         socket.on('getProfiles', async (data) => {
             const profiles = await listProfile();
@@ -318,8 +354,14 @@ module.exports = function () {
             socket.emit('dataContactPreview', contact);
         });
 
-        socket.on('getContactForm', async(data) => {
-            const contactForm = await getContactFormData(data);
+        socket.on('getContactForm', async (data) => {
+            let contactForm = await getContactFormData(data);
+            // let el = contactForm.map(x => x.id = CryptoJS.AES.encrypt(x.id, 'Jean Cleidson Pereira Rodrigues').toString());
+            // console.log(el);
+            for (key in contactForm) {
+                contactForm[key]['id'] = encriptData(contactForm[key]['id']);
+                contactForm[key]['perfil_id'] = encriptData(contactForm[key]['perfil_id']);
+            };
             socket.emit('dataContactForm', contactForm);
         });
 
@@ -335,7 +377,25 @@ module.exports = function () {
             console.log(`O usuario: ${socket.id} saiu`);
         });
 
+        socket.on('testeSession', () => {
+            console.log("teste");
+            req.session.reload((err) => {
+                // if (err) {
+                //     return socket.disconnect();
+                // }
+                req.session.count = { id: "1w" };
+                req.session.save();
+            });
+            socket.emit('testeSessionRes', req.session.count);
+            // req.session.count = { id: "1w" };
+            // req.session.save();
+        });
+
     });
+
+    // var ciphertext = CryptoJS.AES.encrypt('Jean Cleidson', 'Jean Cleidson Pereira Rodrigues').toString();
+    // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'Jean Cleidson Pereira Rodrigues');
+    // var originalText = bytes.toString(CryptoJS.enc.Utf8);
 
     server.listen(portApp);
 

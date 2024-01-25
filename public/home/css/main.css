@@ -96,11 +96,34 @@ a:hover {
 }
 
 .trabalhos {
-    position: relative;
+    position: relative !important;
+    z-index: 0 !important;
     width: 50px;
     height: 100%;
     min-width: 50px;
     padding: 10px !important;
+}
+.trabalhos-group::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: 70%;
+    background: #c4c1c1;
+    border-radius: 10px 10px 0px 0px;
+    z-index: -1;
+}
+.trabalhos-group::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 25px;
+    width: calc(100% - 50px);
+    height: 70%;
+    background: #e3e3e3;
+    border-radius: 10px 10px 0px 0px;
+    z-index: -2;
 }
 .trabalhos:hover > .iconNextAndBack {
     animation: show-aba-controle-works .3s ease-in-out;

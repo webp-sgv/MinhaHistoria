@@ -111,13 +111,40 @@ function pageListContactForm(data) {
     for (row in data) {
         const { id, remetente, email_remetente, texto, createat } = data[row];
         elListContactForm.innerHTML += `
-            <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">${remetente}</h5>
-                    <small>${moment(new Date(createat)).locale('pt-br').fromNow()}</small>
+            <div class="cardMsgFormContact">
+                <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">${remetente}</h5>
+                        <small>${moment(new Date(createat)).locale('pt-br').fromNow()}</small>
+                    </div>
+                    <div class="d-flex listMsgSent">
+                        <div class="d-flex col-12 col-md-12 col-lg-12 col-xl-12 p-0" data-id="${id}" data-author="${email_remetente}">
+                            <p contenteditable="false" class="textFildEditabled mb-1 p-0 col-11 col-md-11 col-lg-11 col-xl-11">${texto}</p>
+                            <i class="btnFinishAlter bi bi-check-circle-fill col-1 col-md-1 col-lg-1 col-xl-1"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="listBtnContactForm d-flex pt-2 pb-2 d-none" style="border: 1px solid rgba(0, 0, 0, 0.125);">
+                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-primary">
+                        <i class="bi bi-pencil-square mr-2"></i>
+                        Editar
+                    </div>
+                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-primary">
+                        <i class="bi bi-chat-left-text mr-2"></i>
+                        Responder
+                    </div>
+                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-alert">
+                        <i class="bi bi-box-seam mr-2"></i>
+                        Arquivar
+                    </div>
+                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-danger">
+                        <i class="bi bi-trash mr-2"></i>
+                        Apagar
+                    </div>
                 </div>
-                <p class="mb-1">${texto}</p>
-            </a>
+
+            </div>
         `;
     };
 };
@@ -127,7 +154,6 @@ function hideSplashLoad() {
     const elCaixaDeFora = document.getElementsByClassName("caixadefora")[0];
     elSplashLoad.classList.add("d-none");
     elCaixaDeFora.classList.remove("d-none");
-
 };
 
 function arrowControleWorks(el) {
@@ -252,3 +278,7 @@ function showMenuFixed() {
         elMenuFixed.setAttribute("data-active", "false");
     }
 };
+
+function acionarTeste(){
+    socket.emit('testeSession', {});
+}

@@ -75,6 +75,19 @@
     background: #eee;
     transform: rotate(-1deg) translateX(0%) scale(1);
 }
+.card--current-flip::before {
+    content: 'Click e mude a foto >';
+    color: #00000061;
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 /* [END] EFECT FLIP CARD */
 
 @keyframes card-out-flip {

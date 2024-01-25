@@ -1,0 +1,33 @@
+.cardMsgFormContact:hover > .listBtnContactForm {
+    transition: all .5s ease-in-out;
+    display: flex !important;
+}
+.listBtnContactForm {
+    display: none !important;
+}
+.listBtnContactForm > div:hover {
+    cursor: pointer;
+}
+.listBtnContactForm > div:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+.listBtnContactForm > div.color-primary:hover {
+    color: #014dac;
+}
+.listBtnContactForm > div.color-alert:hover {
+    color: #ac9201;
+}
+.listBtnContactForm > div.color-danger:hover {
+    color: #ac1501;
+}
+.textFildEditabled[contenteditable="true"] {
+    border: 2px solid rgba(0, 0, 0, 0.04);
+}
+.textFildEditabled[contenteditable="true"] and .textFildEditabled:empty {
+    border: 2px solid red;
+}
+.btnFinishAlter:hover {
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+    color: green;
+}

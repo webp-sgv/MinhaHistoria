@@ -55,3 +55,7 @@ socket.on('responseSaveContactForm', function(data) {
     const elSplashLoad = document.getElementsByClassName("splashFormContact")[0];
     elSplashLoad.classList.add("d-none");
 });
+
+socket.on('testeSessionRes', function(data) {
+    console.log(data)
+});

@@ -1,0 +1,1 @@
+ALTER TABLE contactForm ADD status integer DEFAULT 1
