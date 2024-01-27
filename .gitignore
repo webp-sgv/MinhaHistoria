@@ -7,6 +7,7 @@ node_modules
 
 # DB
 db/storage/sandbox.db
+db/storage/live.db
 db/storage/SandBox.session.sql
 db/sql
 
