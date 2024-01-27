@@ -5,25 +5,25 @@
 .listBtnContactForm {
     display: none !important;
 }
-.listBtnContactForm > div:hover {
+:is(.listBtnContactForm, .listBtnContactForm-active) > div:hover {
     cursor: pointer;
 }
-.listBtnContactForm > div:not(:last-child) {
+:is(.listBtnContactForm, .listBtnContactForm-active) > div:not(:last-child) {
     border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
-.listBtnContactForm > div.color-primary:hover {
+:is(.listBtnContactForm, .listBtnContactForm-active) > div.color-primary:hover {
     color: #014dac;
 }
-.listBtnContactForm > div.color-alert:hover {
+:is(.listBtnContactForm, .listBtnContactForm-active) > div.color-alert:hover {
     color: #ac9201;
 }
-.listBtnContactForm > div.color-danger:hover {
+:is(.listBtnContactForm, .listBtnContactForm-active) > div.color-danger:hover {
     color: #ac1501;
 }
 .textFildEditabled[contenteditable="true"] {
     border: 2px solid rgba(0, 0, 0, 0.04);
 }
-.textFildEditabled[contenteditable="true"] and .textFildEditabled:empty {
+.textFildEditabled-null[contenteditable="true"] {
     border: 2px solid red;
 }
 .btnFinishAlter:hover {

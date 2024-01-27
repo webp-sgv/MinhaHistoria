@@ -56,6 +56,16 @@ socket.on('responseSaveContactForm', function(data) {
     elSplashLoad.classList.add("d-none");
 });
 
-socket.on('testeSessionRes', function(data) {
-    console.log(data)
+socket.on('responseDeleteItem', function(data) {
+    const { id } = data;
+    let elMasterMsgContactForm = document.querySelector(`[data-div-id="${id}"]`);
+    let elMasterDivListContact = document.querySelector('#listContactForm');
+    
+    elMasterMsgContactForm.remove();
+    console.log(elMasterDivListContact.childElementCount);
+
+    if (elMasterDivListContact.childElementCount < 1) {
+        pageRefreshListContactForm();
+    };
+    
 });

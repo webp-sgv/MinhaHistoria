@@ -214,7 +214,6 @@ async function getContactFormData(data) {
     }
 
     const filds = await execulteQuery(query, params);
-    console.log(filds)
     return filds;
 };
 
@@ -273,10 +272,33 @@ async function saveContactForm(data) {
         }
     };
 
-}
+};
+
+async function deleteMsgContactForm(data) {
+    const { NEW_id, email } = data;
+    const query = `
+        DELETE FROM
+        contactForm
+        WHERE id = $id
+        AND email_remetente = $email;
+    `;
+    const params = {
+        "$id": NEW_id,
+        "$email": email
+    };
+    const execultQuery = await execulteQuery(query, params);
+    return data;
+};
+
+function decodificarData(data) {
+    let secret = process.env.SECRET_CRYPTO || 'JEAN CLEIDSON PEREIRA RODRIGUES';
+    var bytes  = CryptoJS.AES.decrypt(data, secret);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
+};
 
 function encriptData(data) {
-    let secret = process.SECRET_ENCRYPT || 'JEAN CLEIDSON PEREIRA RODRIGUES';
+    let secret = process.env.SECRET_CRYPTO || 'JEAN CLEIDSON PEREIRA RODRIGUES';
     let secretValue = CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString();
     return secretValue;
 };
@@ -298,7 +320,7 @@ module.exports = function () {
     }));
 
     const sessionMiddleware = session({
-        secret: "jean cleidson pereira rodrigues",
+        secret: process.env.SECRET_CRYPTO || 'JEAN CLEIDSON PEREIRA RODRIGUES',
         resave: false,
         saveUninitialized: true,
         // cookie: { secure: true, maxAge: 60000 }
@@ -377,22 +399,24 @@ module.exports = function () {
             console.log(`O usuario: ${socket.id} saiu`);
         });
 
-        socket.on('testeSession', () => {
-            console.log("teste");
-            req.session.reload((err) => {
-                // if (err) {
-                //     return socket.disconnect();
-                // }
-                req.session.count = { id: "1w" };
-                req.session.save();
-            });
-            socket.emit('testeSessionRes', req.session.count);
-            // req.session.count = { id: "1w" };
-            // req.session.save();
+        socket.on('removeItem', async (data) => {
+            data.NEW_id = decodificarData(data.id);
+            const deleteForm = deleteMsgContactForm(data);
+            socket.emit('responseDeleteItem', data);
         });
 
     });
 
+    // req.session.reload((err) => {
+    //     // if (err) {
+    //     //     return socket.disconnect();
+    //     // }
+    //     req.session.count = { id: "1w" };
+    //     req.session.save();
+    // });
+    // socket.emit('testeSessionRes', req.session.count);
+    // req.session.count = { id: "1w" };
+    // req.session.save();
     // var ciphertext = CryptoJS.AES.encrypt('Jean Cleidson', 'Jean Cleidson Pereira Rodrigues').toString();
     // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'Jean Cleidson Pereira Rodrigues');
     // var originalText = bytes.toString(CryptoJS.enc.Utf8);

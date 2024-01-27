@@ -111,36 +111,72 @@ function pageListContactForm(data) {
     for (row in data) {
         const { id, remetente, email_remetente, texto, createat } = data[row];
         elListContactForm.innerHTML += `
-            <div class="cardMsgFormContact">
+            <div class="cardMsgFormContact" data-div-id=${id}>
+                
+                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-confirm-delete-id="${id}" style="border: 2px solid rgba(255, 1, 1, 0.47);">
+                    <div class="d-flex flex-column flex- w-50 justify-content-between">
+                        <h5 class="mb-2 text-danger" style="width: 100%;">
+                            Apagar!
+                        </h5>
+                        <h6 class="mb-3" style="width: 100%;">
+                            Deseja apagar essa mensagem?
+                        </h6>
+                    </div>
+                    <div class="w-50">
+                        <button class="btn btn-primary" onclick="actionButtonForm('confirm-remove', '${id}', '${email_remetente}', this)">Sim</button>
+                        <button class="btn btn-danger" onclick="actionButtonForm('cancel-remove', '${id}', '${email_remetente}', this)">Não</button>
+                    </div>
+                </a>
+
+                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-splash-id="${id}">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" style="width: 100%;">
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-6 rounded-2" style="height: 10px;"></span>
+                            </p>
+                        </h5>
+                        <small style="width: 100%;">
+                            <p class="card-text placeholder-glow" style="text-align: end;">
+                                <span class="placeholder col-4 rounded-2" style="height: 10px;"></span>
+                            </p>
+                        </small>
+                    </div>
+                    <p class="mb-1" style="width: 100%;">
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7 rounded-2" style="height: 10px;"></span>
+                        </p>
+                    </p>
+                </a>
+
                 <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">${remetente}</h5>
                         <small>${moment(new Date(createat)).locale('pt-br').fromNow()}</small>
                     </div>
-                    <div class="d-flex listMsgSent">
+                    <div class="d-flex flex-column listMsgSent-${id}" data-list-msg="${id}">
                         <div class="d-flex col-12 col-md-12 col-lg-12 col-xl-12 p-0" data-id="${id}" data-author="${email_remetente}">
-                            <p contenteditable="false" class="textFildEditabled mb-1 p-0 col-11 col-md-11 col-lg-11 col-xl-11">${texto}</p>
-                            <i class="btnFinishAlter bi bi-check-circle-fill col-1 col-md-1 col-lg-1 col-xl-1"></i>
+                            <p contenteditable="false" class="textFildEditabled mb-1 p-0 col-11" data-content="${texto}">${texto}</p>
+                            <i class="btnFinishAlter-${id} btnFinishAlter bi bi-check-circle-fill d-none col-1" onclick="finishEditMsgForm('${id}', '${email_remetente}')"></i>
                         </div>
                     </div>
                 </a>
 
-                <div class="listBtnContactForm d-flex pt-2 pb-2 d-none" style="border: 1px solid rgba(0, 0, 0, 0.125);">
-                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-primary">
+                <div class="masterCardActionForm-${id} listBtnContactForm d-flex pt-2 pb-2 d-none" style="border: 1px solid rgba(0, 0, 0, 0.125);">
+                    <div data-action-id="${id}" class="d-none col-3 col-md-3 col-lg-3 col-xl-3 color-primary" onclick="actionButtonForm('edit', '${id}', '${email_remetente}', this)">
                         <i class="bi bi-pencil-square mr-2"></i>
-                        Editar
+                        <div>Editar</div>
                     </div>
-                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-primary">
+                    <div data-action-id="${id}" class="d-none col-3 col-md-3 col-lg-3 col-xl-3 color-primary" onclick="actionButtonForm('response', '${id}', '${email_remetente}', this)">
                         <i class="bi bi-chat-left-text mr-2"></i>
                         Responder
                     </div>
-                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-alert">
+                    <div data-action-id="${id}" class="d-none col-3 col-md-3 col-lg-3 col-xl-3 color-alert" onclick="actionButtonForm('archive', '${id}', '${email_remetente}', this)">
                         <i class="bi bi-box-seam mr-2"></i>
                         Arquivar
                     </div>
-                    <div data-action-id="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-danger">
+                    <div data-action-id="${id}" data-action-delete="${id}" class="d-flex col-3 col-md-3 col-lg-3 col-xl-3 color-danger" onclick="actionButtonForm('remove', '${id}', '${email_remetente}', this)">
                         <i class="bi bi-trash mr-2"></i>
-                        Apagar
+                        <div>Apagar</div>
                     </div>
                 </div>
 
