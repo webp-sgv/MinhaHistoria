@@ -113,7 +113,7 @@ function pageListContactForm(data) {
         elListContactForm.innerHTML += `
             <div class="cardMsgFormContact" data-div-id=${id}>
                 
-                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-confirm-delete-id="${id}" style="border: 2px solid rgba(255, 1, 1, 0.47);">
+                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-confirm-delete-id="${id}" style="border: 2px solid rgba(255, 1, 1, 0.47); background: transparent;">
                     <div class="d-flex flex-column flex- w-50 justify-content-between">
                         <h5 class="mb-2 text-danger" style="width: 100%;">
                             Apagar!
@@ -128,7 +128,8 @@ function pageListContactForm(data) {
                     </div>
                 </a>
 
-                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-splash-id="${id}">
+                <a class="contactForm list-group-item list-group-item-action d-none" aria-current="true" data-splash-id="${id}"
+                style="background: transparent;">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1" style="width: 100%;">
                             <p class="card-text placeholder-glow">
@@ -148,7 +149,7 @@ function pageListContactForm(data) {
                     </p>
                 </a>
 
-                <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true">
+                <a data-email="${email_remetente}" data-createat="${createat}" data-form-id="${id}" class="contactForm list-group-item list-group-item-action" aria-current="true" style="background: transparent;">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">${remetente}</h5>
                         <small>${moment(new Date(createat)).locale('pt-br').fromNow()}</small>
